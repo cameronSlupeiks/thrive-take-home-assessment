@@ -99,6 +99,9 @@ def main
 
   return if companies.empty? || users.empty?
 
+  # Sort companies by ID
+  companies.sort_by! { |company| company["id"].to_i }
+
   # Group users by company and categorize
   users_by_company = users.group_by { |user| user["company_id"] }
 
@@ -115,6 +118,7 @@ def main
       end
     end
 
+    # Sort users by last name
     company["emailed_users"] = emailed_users.sort_by { |user| user["last_name"] }
     company["not_emailed_users"] = not_emailed_users.sort_by { |user| user["last_name"] }
   end
